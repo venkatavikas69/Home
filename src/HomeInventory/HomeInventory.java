@@ -3,9 +3,9 @@ package HomeInventory;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Calendar;
 import com.toedter.calendar.*;
 import java.beans.*;
+import java.awt.geom.*;
 
 public class HomeInventory extends JFrame {
 
@@ -35,6 +35,9 @@ public class HomeInventory extends JFrame {
 	JLabel photoLabel = new JLabel();
 	JTextArea photoTextArea = new JTextArea();
 	JButton photoButton = new JButton();
+	JPanel searchPanel = new JPanel();
+	JButton[] searchButton = new JButton[26];
+	PhotoPanel photoPanel = new PhotoPanel();
 
 	public static void main(String[] args) {
 		new HomeInventory();
@@ -43,7 +46,7 @@ public class HomeInventory extends JFrame {
 	public HomeInventory() {
 		setVisible(true);
 		setTitle("Home Inventory Manager");
-		//setResizable(false);
+		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		getContentPane().setLayout(new GridBagLayout());
 		GridBagConstraints gridConstraints;
@@ -279,6 +282,46 @@ public class HomeInventory extends JFrame {
 		gridConstraints.anchor = GridBagConstraints.WEST;
 		getContentPane().add(photoButton, gridConstraints);
 		photoButton.addActionListener(e -> photoButtonActionPerformed(e));
+		
+		searchPanel.setPreferredSize(new Dimension(240, 160));
+		searchPanel.setBorder(BorderFactory.createTitledBorder("Item Search"));
+		searchPanel.setLayout(new GridBagLayout());
+		gridConstraints = new GridBagConstraints();
+		gridConstraints.gridx = 1;
+		gridConstraints.gridy = 7;
+		gridConstraints.gridwidth = 3;
+		gridConstraints.insets = new Insets(10, 0, 10, 0);
+		gridConstraints.anchor = GridBagConstraints.CENTER;
+		getContentPane().add(searchPanel, gridConstraints);
+		
+		int x = 0, y = 0;
+		for(int i = 0; i < 26; i++) {
+			searchButton[i] = new JButton();
+			searchButton[i].setText(String.valueOf((char)(65+i)));
+			searchButton[i].setFont(new Font("Arial", Font.BOLD, 12));
+			searchButton[i].setMargin(new Insets(-10, -10, -10, -10));
+			sizeButton(searchButton[i], new Dimension(37, 27));
+			searchButton[i].setBackground(Color.ORANGE);
+			gridConstraints = new GridBagConstraints();
+			gridConstraints.gridx = x;
+			gridConstraints.gridy = y;
+			searchPanel.add(searchButton[i], gridConstraints);
+			searchButton[i].addActionListener(e -> searchButtonActionPerformed(e));
+			x++;
+			if(x%6 == 0) {
+				x = 0;
+				y++;
+			}
+		}
+		
+		photoPanel.setPreferredSize(new Dimension(240 , 160));
+		gridConstraints = new GridBagConstraints();
+		gridConstraints.gridx = 4;
+		gridConstraints.gridy = 7;
+		gridConstraints.gridwidth = 3;
+		gridConstraints.insets = new Insets(10, 0, 10, 10);
+		gridConstraints.anchor =  GridBagConstraints.CENTER;
+		getContentPane().add(photoPanel, gridConstraints);
 
 		pack();
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -323,9 +366,25 @@ public class HomeInventory extends JFrame {
 	private void photoButtonActionPerformed(ActionEvent e) {
 		
 	}
+	
+	private void searchButtonActionPerformed(ActionEvent e) {
+		
+	}
 
 	private void exitForm(WindowEvent evt) {
 		System.exit(0);
+	}
+	
+	class PhotoPanel extends JPanel {
+		public void paintComponent(Graphics g) {
+			 Graphics2D g2D = (Graphics2D) g;
+			super.paintComponents(g2D);
+			
+			g2D.setPaint(Color.BLACK);
+			g2D.draw(new Rectangle2D.Double(0, 0, getWidth()-1, getHeight()-1));
+			
+			g2D.dispose();
+		}
 	}
 
 }

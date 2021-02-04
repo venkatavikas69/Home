@@ -137,6 +137,7 @@ public class HomeInventory extends JFrame {
 		gridConstraints.insets = new Insets(10, 0, 0, 10);
 		gridConstraints.anchor = GridBagConstraints.WEST;
 		getContentPane().add(itemTextField, gridConstraints);
+		itemTextField.addActionListener(e -> itemTextFieldActionPerformed(e));
 		
 		locationLabel.setText("Location");
 		gridConstraints = new GridBagConstraints();
@@ -157,6 +158,7 @@ public class HomeInventory extends JFrame {
 		gridConstraints.insets = new Insets(10, 0, 0, 10);
 		gridConstraints.anchor = GridBagConstraints.WEST;
 		getContentPane().add(locationComboBox, gridConstraints);
+		locationComboBox.addActionListener(e -> locationComboBoxActionPerformed(e));
 		
 		markedCheckBox.setText("Marked?");
 		gridConstraints = new GridBagConstraints();
@@ -182,6 +184,7 @@ public class HomeInventory extends JFrame {
 		gridConstraints.insets = new Insets(10, 0, 0, 10);
 		gridConstraints.anchor = GridBagConstraints.WEST;
 		getContentPane().add(serialTextField, gridConstraints);
+		serialTextField.addActionListener(e -> serialTextFieldActionPerformed(e));
 		
 		priceLabel.setText("Purchase Price");
 		gridConstraints = new GridBagConstraints();
@@ -199,6 +202,7 @@ public class HomeInventory extends JFrame {
 		gridConstraints.insets = new Insets(10, 0, 0, 10);
 		gridConstraints.anchor = GridBagConstraints.WEST;
 		getContentPane().add(priceTextField, gridConstraints);
+		priceTextField.addActionListener(e ->  priceTextFieldActionPerformed(e));
 		
 		dateLabel.setText("Date Purchased");
 		gridConstraints = new GridBagConstraints();
@@ -216,6 +220,7 @@ public class HomeInventory extends JFrame {
 		gridConstraints.insets = new Insets(10,0,0,10);
 		gridConstraints.anchor = GridBagConstraints.WEST;
 		getContentPane().add(dateDateChooser, gridConstraints);
+		dateDateChooser.addPropertyChangeListener(e -> dateDateChooserPropertyChange(e));
 		
 		storeLabel.setText("Store/Website");
 		gridConstraints = new GridBagConstraints();
@@ -233,6 +238,7 @@ public class HomeInventory extends JFrame {
 		gridConstraints.insets = new Insets(10, 0, 0, 10);
 		gridConstraints.anchor = GridBagConstraints.WEST;
 		getContentPane().add(storeTextField, gridConstraints);
+		storeTextField.addActionListener(e -> storeTextFieldActionPerformed(e));
 		
 		noteLabel.setText("Note");
 		gridConstraints = new GridBagConstraints();
@@ -250,6 +256,7 @@ public class HomeInventory extends JFrame {
 		gridConstraints.insets = new Insets(10, 0, 0, 10);
 		gridConstraints.anchor = GridBagConstraints.WEST;
 		getContentPane().add(noteTextField, gridConstraints);
+		noteTextField.addActionListener(e -> noteTextFieldActionPerformed(e));
 		
 		photoLabel.setText("Photo");
 		gridConstraints = new GridBagConstraints();
@@ -369,6 +376,34 @@ public class HomeInventory extends JFrame {
 	
 	private void searchButtonActionPerformed(ActionEvent e) {
 		
+	}
+	
+	private void itemTextFieldActionPerformed(ActionEvent e) {
+		locationComboBox.requestFocus();
+	}
+	
+	private void locationComboBoxActionPerformed(ActionEvent e) {
+		serialTextField.requestFocus();
+	}
+	
+	private void serialTextFieldActionPerformed(ActionEvent e) {
+		priceTextField.requestFocus();
+	}
+	
+	private void priceTextFieldActionPerformed(ActionEvent e) {
+		dateDateChooser.requestFocus();
+	}
+	
+	private void dateDateChooserPropertyChange(PropertyChangeEvent e) {
+		storeTextField.requestFocus();
+	}
+	
+	private void storeTextFieldActionPerformed(ActionEvent e) {
+		noteTextField.requestFocus();
+	}
+	
+	private void noteTextFieldActionPerformed(ActionEvent e) {
+		photoButton.requestFocus();
 	}
 
 	private void exitForm(WindowEvent evt) {
